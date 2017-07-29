@@ -1,4 +1,6 @@
 class MeetupsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @meetups = Meetup.all
   end
@@ -31,7 +33,7 @@ class MeetupsController < ApplicationController
       redirect_to meetups_path, notice: "Update Success"
     else
       render :edit
-    end 
+    end
   end
 
   def destroy
